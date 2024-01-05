@@ -22,10 +22,11 @@ router.get('/eventos', async (req, res) => {
 //criando o evento
 router.post('/evento', async (req, res) => {
 	console.log('Criando novo evento');
-	const novoEvento = req.body;
-
-	console.log('Objeto Enviado: ');
-	console.log(evento);
+	console.log('req ' + req.body)
+	let novoEvento = req.body;
+	novoEvento.data = Date.parse(novoEvento.data)
+	novoEvento._id = new mongoose.mongo.ObjectId();
+	console.log('evento enviado: ' + JSON.stringify(novoEvento))
 	const eventoCriado = await Evento.create(novoEvento);
 	res.json(eventoCriado);
 });

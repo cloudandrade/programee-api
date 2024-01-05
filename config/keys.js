@@ -1,4 +1,7 @@
+require('dotenv').config()
+
+
 module.exports = {
   MongoURI:
-    process.env.MONBODB_ATLAS_KEYS,
+    process.env.MONGODB_ATLAS_KEYS,
 };

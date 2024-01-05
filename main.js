@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./config/keys').MongoURI;
-require('dotenv').config
+const routes = require('./routes');
+require('dotenv').config()
 
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -13,21 +14,18 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 //BODY PARSER
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 app.use(cors());
-
-//ROUTES
-app.use('/', require('./routes/index'));
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+//routes
+app.use(routes);
 
 if (process.env.DB_STRATEGY && process.env.DB_STRATEGY === 'hosted') {
   //MONGO ONLINE - Atlas
 
-
+  console.log('AtlasDb Starting Connection...');
   mongoose
-    .connect(db, { useNewUrlParser: true })
+    .connect(db, {})
     .then(() => {
       console.log('AtlasDb Connected...');
     })
@@ -37,9 +35,11 @@ if (process.env.DB_STRATEGY && process.env.DB_STRATEGY === 'hosted') {
     });
 } else {
   // MONGOOSE local
+
+  console.log('MongoDb Starting Connection...');
   mongoose.Promise = global.Promise;
   mongoose
-    .connect('mongodb://localhost/tealist', { useNewUrlParser: true })
+    .connect('mongodb://localhost/tealist', {})
     .then(() => {
       console.log('Mongodb connected...');
     })
@@ -47,10 +47,6 @@ if (process.env.DB_STRATEGY && process.env.DB_STRATEGY === 'hosted') {
       console.log('houve um problema ao se conectar ao banco de dados, erro: ' + erro);
     })
 }
-
-
-
-
 
 //SERVER
 app.listen(process.env.port || PORT, console.log(`Server started on port ${PORT}`));

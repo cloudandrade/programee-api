@@ -3,8 +3,7 @@ const Schema = mongoose.Schema;
 
 const Evento = new Schema({
   _id: {
-    type: String,
-    required: true,
+    type: String
   },
   titulo: {
     type: String,
@@ -14,7 +13,7 @@ const Evento = new Schema({
     type: String,
   },
   classeId: {
-    type: String,
+    type: Number,
   },
   descricao: {
     type: String,
