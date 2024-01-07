@@ -1,0 +1,12 @@
+GET https://localhost:5000/eventos HTTP/1.1
+
+###
+
+POST https://localhost:5000/evento HTTP/1.1
+{
+  "titulo": "atividade dos rapazes",
+  "classe": "rapazes",
+  "classeId": 1,
+  "descricao": "um evento qualquer numa data qualquer",
+  "data": "1993-01-01"
+}

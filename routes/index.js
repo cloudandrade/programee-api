@@ -12,8 +12,7 @@ router.get('/', async (req, res) => {
 //get all itens
 router.get('/eventos', async (req, res) => {
 	console.log('Buscando lista de eventos ordenando pela data');
-	Evento.find({})
-		/* .sort({ id: 'asc' }) */
+	Evento.find({}).sort({ data: 'asc' }).exec()
 		.then((lista) => {
 			res.json(lista);
 		});
