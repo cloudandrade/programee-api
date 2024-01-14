@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/* const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Classe = new Schema({
@@ -11,4 +11,4 @@ const Classe = new Schema({
     required: true,
   }
 });
-mongoose.model('classe', Classe);
+mongoose.model('classe', Classe); */

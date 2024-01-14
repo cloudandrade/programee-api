@@ -1,6 +1,9 @@
 let db = require('./db.json')
-const mongoose = require('mongoose');
 const fs = require("fs");
+const Hashids = require('hashids/cjs');
+
+const hashids = new Hashids('333221', 8);
+const encodeSample = 12345;
 
 class Evento {
   constructor({
@@ -10,7 +13,7 @@ class Evento {
     descricao,
     data }
   ) {
-    this._id = new mongoose.mongo.ObjectId();
+    this._id = hashids.encode(encodeSample);
     this.titulo = titulo
     this.classe = classe
     this.classeId = classeId

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+/* const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Evento = new Schema({
@@ -22,4 +22,4 @@ const Evento = new Schema({
     type: Date,
   },
 });
-mongoose.model('eventos', Evento);
+mongoose.model('eventos', Evento); */
