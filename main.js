@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const db = require('./config/keys').MongoURI;
 const routes = require('./routes');
 require('dotenv').config()
+const nodb = require('./config/nodb/nodb')
 
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -33,9 +34,10 @@ if (process.env.DB_STRATEGY && process.env.DB_STRATEGY === 'hosted') {
       console.log('Falha ao conectar ao AtlasDb');
       console.log(err);
     });
+} else if (process.env.DB_STRATEGY && process.env.DB_STRATEGY === 'nodb') {
+  nodb.checkDb()
 } else {
   // MONGOOSE local
-
   console.log('MongoDb Starting Connection...');
   mongoose.Promise = global.Promise;
   mongoose
