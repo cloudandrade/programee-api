@@ -21,5 +21,8 @@ const Evento = new Schema({
   data: {
     type: Date,
   },
+  horario: {
+    type: String,
+  }
 });
 mongoose.model('eventos', Evento);

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-const nodb = require('../config/nodb/nodb')
+const nodb = require('../config/nodb/nodb');
 
 require('../models/Evento'); //importando o model para ser usado
 const Evento = mongoose.model('eventos'); //passando o valor do model para uma variavel e relacionando a collection
@@ -26,22 +26,35 @@ router.get('/eventos', async (req, res) => {
 //criando o evento
 router.post('/evento', async (req, res) => {
 	console.log('Criando novo evento');
-	console.log('req ' + req.body)
+	console.log('req ' + JSON.stringify(req.body));
+
+	let novoEvento = req.body;
+
+	// Verifica se a data e o horário estão presentes
+	if (!novoEvento.data || !novoEvento.horario) {
+		return res.status(400).json({ error: 'Data e horário são obrigatórios.' });
+	}
+
+	// Formatação correta da data
+	novoEvento.data = formatDate(novoEvento.data, novoEvento.horario);
 
 	if (process.env.DB_STRATEGY && process.env.DB_STRATEGY === 'nodb') {
-		let novoEvento = req.body;
-		novoEvento.data = new Date(novoEvento.data)
-		const eventoCriado = await nodb.create(novoEvento)
-		console.log('evento enviado: ' + JSON.stringify(eventoCriado))
-		res.json(eventoCriado)
+		const eventoCriado = await nodb.create(novoEvento);
+		console.log('evento criado: ' + JSON.stringify(eventoCriado));
+		res.json(eventoCriado);
 	} else {
-		let novoEvento = req.body;
-		novoEvento.data = Date.parse(novoEvento.data)
+		// Geração de novo ID para o evento
 		novoEvento._id = new mongoose.mongo.ObjectId();
-		console.log('evento enviado: ' + JSON.stringify(novoEvento))
+
 		const eventoCriado = await Evento.create(novoEvento);
+		console.log('evento criado: ' + JSON.stringify(eventoCriado));
 		res.json(eventoCriado);
 	}
 });
+
+function formatDate(date, time) {
+	const formattedDate = new Date(`${date}T${time}:00Z`);
+	return formattedDate.toISOString();
+}
 
 module.exports = router;

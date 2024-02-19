@@ -6,7 +6,23 @@ POST https://localhost:5000/evento HTTP/1.1
 {
   "titulo": "atividade dos rapazes",
   "classe": "rapazes",
-  "classeId": 1,
+  "classeId": 4,
   "descricao": "um evento qualquer numa data qualquer",
-  "data": "1993-01-01"
+  "data": "2024-03-01",
+  "horario": "19:30"
 }
+
+const opcoes = [
+    { id: 1, className: 'Soc Soc' },
+    { id: 2, className: 'Quórum' },
+    { id: 3, className: 'Primária' },
+    { id: 4, className: 'Rapazes' },
+    { id: 5, className: 'Moças' },
+    { id: 6, className: 'Jas' },
+    { id: 11, className: 'Mas' },
+    { id: 7, className: 'Obra Missionária' },
+    { id: 8, className: 'ORM' },
+    { id: 9, className: 'Quorum & SS' },
+    { id: 12, className: 'Jas & Mas' },
+    { id: 10, className: 'Ala' }
+  ];

@@ -8,7 +8,7 @@ class Evento {
     classe,
     classeId,
     descricao,
-    data }
+    data, horario }
   ) {
     this._id = new mongoose.mongo.ObjectId();
     this.titulo = titulo
@@ -16,6 +16,7 @@ class Evento {
     this.classeId = classeId
     this.descricao = descricao
     this.data = data
+    this.horario = horario
   }
 }
 
